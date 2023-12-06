@@ -1,0 +1,16 @@
+<div class="main-content">
+    <div class="section-content section-content-p3">
+        <div class="container-fluid">
+            <div class="row">
+                <div *ngFor="let tempProduct of products" class="col-md-3">
+                    <div class="product-box">
+                        <img src="{{tempProduct.imageUrl}}" class="img-responsive">
+                        <h2>{{tempProduct.name}}</h2>
+                        <div class="price">{{tempProduct.unitPrice}}</div>
+                        <a href="#" class="primary-btn btn">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
