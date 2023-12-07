@@ -14,6 +14,7 @@ export class SearchComponent {
 
   }
   doSearch(value: string) {
+    debugger
     console.log(`value=${value}`);
     this.router.navigateByUrl(`/search/${value}`);
   }

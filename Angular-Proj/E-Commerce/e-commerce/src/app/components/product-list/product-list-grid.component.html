@@ -10,6 +10,9 @@
                         <a href="#" class="primary-btn btn">Add to cart</a>
                     </div>
                 </div>
+                <div *ngIf="products?.length==0" class="alert alert-warning">
+                    No products found
+                </div>
             </div>
         </div>
     </div>

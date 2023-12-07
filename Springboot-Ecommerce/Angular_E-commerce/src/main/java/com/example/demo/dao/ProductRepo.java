@@ -10,4 +10,5 @@ import com.example.demo.entity.Product;
 @RepositoryRestResource(collectionResourceRel="product",path="products")
 public interface ProductRepo extends JpaRepository<Product, Long>{		
 	Page<Product> findByCategoryId(@Param("id") Long id,Pageable pageable);
+	Page<Product> findByNameContaining(@Param("name") String name, Pageable pageable);
 } 

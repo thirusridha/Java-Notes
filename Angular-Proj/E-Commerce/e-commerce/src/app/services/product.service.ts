@@ -12,8 +12,8 @@ export class ProductService {
   private categoryUrl = 'http://localhost:8080/product-category';
   constructor(private httpClient: HttpClient) { }
   getProductList(theCategoryId: number): Observable<Product[]> {
-    const serchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
-    return this.getProducts(serchUrl);
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
+    return this.getProducts(searchUrl);
   }
   searchProducts(theKeyword: string): Observable<Product[]> {
     const serchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;

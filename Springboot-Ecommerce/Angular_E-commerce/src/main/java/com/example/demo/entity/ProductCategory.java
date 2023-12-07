@@ -1,5 +1,4 @@
 package com.example.demo.entity;
-
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -22,5 +21,7 @@ public class ProductCategory {
 	private String categoryName;
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
 	@Column(name="products")
-	private Set<Product> products;
+	Set<Product> products;
+	@Column(name="count")
+	private Integer count;
 }
