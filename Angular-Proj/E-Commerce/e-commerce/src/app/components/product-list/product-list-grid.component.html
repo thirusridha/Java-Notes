@@ -4,15 +4,43 @@
             <div class="row">
                 <div *ngFor="let tempProduct of products" class="col-md-3">
                     <div class="product-box">
-                        <img src="{{tempProduct.imageUrl}}" class="img-responsive">
-                        <h2>{{tempProduct.name}}</h2>
-                        <div class="price">{{tempProduct.unitPrice}}</div>
-                        <a href="#" class="primary-btn btn">Add to cart</a>
+                        <a routerLink="/product/{{tempProduct.id}}">
+                            <img src="{{tempProduct.imageUrl}}" class="img-responsive">
+                        </a>
+                        <a routerLink="/product/{{tempProduct.id}}">
+                            <h2>{{tempProduct.name}}</h2>
+                        </a>
+
+                        <h2 style="color: tomato;font-size: x-large;">${{tempProduct.unitPrice}}</h2>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
                     </div>
                 </div>
                 <div *ngIf="products?.length==0" class="alert alert-warning">
                     No products found
                 </div>
+            </div>
+            <!--begin footer-->
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="row">
+                        <div class="col-md-9" style="padding-left: 30%;">
+                            <ngb-pagination [(page)]="thePageNumber" [maxSize]="5" [pageSize]="thePageSize"
+                                [boundaryLinks]="true" [collectionSize]="theTotalElements" (pageChange)="listProduct()">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end footer-->
+            <div class="col-md-3 mt-2" style="text-align: right;">
+                <span class="mr-2">Page Size</span>
+                <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                    <option selected="true">5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                </select>
             </div>
         </div>
     </div>

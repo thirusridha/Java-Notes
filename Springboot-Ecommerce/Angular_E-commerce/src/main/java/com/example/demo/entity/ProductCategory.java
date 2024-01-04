@@ -11,7 +11,7 @@ import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
-@Data
+@Data	
 public class ProductCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,7 @@ public class ProductCategory {
 	private Long id;
 	@Column(name="category_name")
 	private String categoryName;
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "category")				
 	@Column(name="products")
 	Set<Product> products;
-	@Column(name="count")
-	private Integer count;
 }
