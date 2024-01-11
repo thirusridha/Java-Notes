@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../common/cart-item';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +8,15 @@ import { Subject } from 'rxjs';
 export class CartService {
 
   cartItems: CartItem[] = [];
-  totalPrice: Subject<number> = new Subject<number>();
-  totalQuantity: Subject<number> = new Subject<number>();
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
   constructor() {
-
   }
   addToCart(theCartItem: CartItem) {
     debugger
     let alreadyExistsInCart: boolean = false;
     let existingCartItem: CartItem | undefined;
     if (this.cartItems.length > 0) {
-
       // for (let tempCartItem of this.cartItems) {
       //   if (tempCartItem.id === theCartItem.id) {
       //     existingCartItem = tempCartItem;
