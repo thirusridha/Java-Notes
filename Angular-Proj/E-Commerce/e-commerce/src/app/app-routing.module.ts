@@ -4,8 +4,15 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-
+import { OKTA_CONFIG, OktaAuthStateService, OktaCallbackComponent } from '@okta/okta-angular';
+import { ProductService } from './services/product.service';
+import { OktaAuth } from '@okta/okta-auth-js';
+import { AppComponent } from './app.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+// const oktaConfig = myAppConfig.oidc;
+// const oktaAuth = new OktaAuth(oktaConfig);
 const routes: Routes = [
+  { path: 'login-page', component: LoginPageComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
@@ -19,6 +26,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ProductService,
+    OktaAuthStateService],
+  bootstrap: [AppComponent]
 })
 export class AppRoutingModule { }
