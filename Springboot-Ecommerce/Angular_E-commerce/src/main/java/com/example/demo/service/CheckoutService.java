@@ -4,4 +4,5 @@ import com.example.demo.dto.PurchaseResponse;
 //@Service
 public interface CheckoutService {
 	PurchaseResponse placeOrder(Purchase purchase);
+	
 }

@@ -13,10 +13,10 @@ import com.example.demo.service.CheckoutService;
 @RequestMapping("/checkout")
 public class CheckOutController {
 	@Autowired
-	private  CheckoutService checkoutService ;
+	private CheckoutService checkoutService ;
 	@PostMapping("/purchase")
 	public PurchaseResponse placeOrder(@RequestBody Purchase purchase){
-			PurchaseResponse purchaseResponse =checkoutService.placeOrder(purchase);
-			return purchaseResponse;
+			PurchaseResponse purchaseResponse= checkoutService.placeOrder(purchase);
+			 return purchaseResponse;
 	}
 }

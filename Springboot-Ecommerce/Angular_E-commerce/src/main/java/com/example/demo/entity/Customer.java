@@ -1,10 +1,8 @@
 package com.example.demo.entity;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
-
-import ch.qos.logback.core.encoder.ByteArrayUtil;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,10 +11,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Table
 @Entity
+@ToString
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +24,25 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String email;
-	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-	private Set<Order> orders;
+	@OneToMany(mappedBy = "cus",cascade = CascadeType.ALL)
+	private Set<Order> orders = new HashSet<>();
+	
 	public void add(Order order) {
 		System.out.println(order);
 		if(order!=null) {
 			if(orders == null) {
 				orders=new HashSet<>();
+				System.out.println(orders);
 			}
-			orders.add(order);
-			order.setCustomer(this);
+			System.out.println(order);
+			 if (!orders.contains(order)) {
+			        orders.add(order);
+			        order.setCus(this); // Set the customer on the order
+			    }else {
+		            System.out.println("Order already belongs to this customer. Avoiding recursive loop.");
+		        }
+		}else {
+			System.out.println("failed");
 		}
 	}
 }

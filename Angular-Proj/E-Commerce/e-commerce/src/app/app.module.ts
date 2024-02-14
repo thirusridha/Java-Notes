@@ -14,9 +14,11 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OKTA_CONFIG, OktaAuthModule, OktaAuthStateService } from '@okta/okta-angular';
 import { LoginComponent } from './components/login/login.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogActions, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,8 +29,8 @@ import { MatCardModule } from '@angular/material/card';
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    LoginComponent,
-    LoginPageComponent,
+    LoginComponent
+
   ],
   imports: [
     OktaAuthModule,
@@ -38,7 +40,12 @@ import { MatCardModule } from '@angular/material/card';
     NgbModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatInputModule
   ],
   providers: [
   ],

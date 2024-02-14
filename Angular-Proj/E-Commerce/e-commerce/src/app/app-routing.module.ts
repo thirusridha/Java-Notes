@@ -8,11 +8,9 @@ import { OKTA_CONFIG, OktaAuthStateService, OktaCallbackComponent } from '@okta/
 import { ProductService } from './services/product.service';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
 // const oktaConfig = myAppConfig.oidc;
 // const oktaAuth = new OktaAuth(oktaConfig);
 const routes: Routes = [
-  { path: 'login-page', component: LoginPageComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
