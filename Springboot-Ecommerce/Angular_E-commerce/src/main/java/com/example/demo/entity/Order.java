@@ -39,9 +39,8 @@ public class Order {
 	@UpdateTimestamp
 	private Date lastUpdated;
 	
-	@ManyToOne
-	@JoinColumn(name="customer_id")
-	private Customer cus;
+//	@ManyToOne
+//	private Customer cus;
 	@OneToOne(cascade =CascadeType.ALL)
 	@JoinColumn(name = "shipping_address_id",referencedColumnName = "id")
 	private Address shippingAddress;
@@ -63,21 +62,5 @@ public class Order {
 	public int hashCode() {
 	    return Objects.hash(id);
 	}
-//	public void add(OrderItem item) {
-//		if(orderItems!=null) {
-//			if(orderItems == null) {
-//				orderItems=new HashSet<>();
-//				System.out.println(orderItems);
-//			}
-//			 if (!orderItems.contains(item)) {
-//				 orderItems.add(item);
-//			        item.setOrder(this); // Set the customer on the order
-//			    }else {
-//		            System.out.println("Order already belongs to this customer. Avoiding recursive loop.");
-//		        }
-//		}else {
-//			System.out.println("failed");
-//		}
-//	}
 	
 }

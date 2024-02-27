@@ -12,4 +12,5 @@ import com.example.demo.entity.State;
 @RepositoryRestResource
 public interface StateRepo extends JpaRepository<State, Integer>{
 	List<State> findByCountryCode(@Param("code") String code);
+	
 }

@@ -11,7 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgControl, ReactiveFormsModule } from '@angular/forms';
 import { OKTA_CONFIG, OktaAuthModule, OktaAuthStateService } from '@okta/okta-angular';
 import { LoginComponent } from './components/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,6 +19,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogActions, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { LoginPageComponent } from './components/login-page/login-page.component';
+import { RegisterComponent } from './components/register/register.component';
+import { PasswordComponent } from './components/password/password.component';
+// import { NoopAnimationPlayer } from '@angular/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +36,10 @@ import { MatInputModule } from '@angular/material/input';
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    LoginComponent
+    LoginComponent,
+    LoginPageComponent,
+    RegisterComponent,
+    PasswordComponent
 
   ],
   imports: [
@@ -45,10 +55,13 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatDialogContent,
     MatDialogActions,
-    MatInputModule
+    MatInputModule,
+    // BrowserAnimationsModule 
+    NoopAnimationsModule,
+    MatIconModule,
+    MatGridListModule
   ],
-  providers: [
-  ],
+  providers: [LoginComponent, RegisterComponent, LoginPageComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

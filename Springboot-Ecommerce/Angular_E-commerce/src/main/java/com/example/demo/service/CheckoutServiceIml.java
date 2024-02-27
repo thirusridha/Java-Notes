@@ -22,6 +22,7 @@ public class CheckoutServiceIml  implements CheckoutService{
 	@Transactional
 	public PurchaseResponse placeOrder(Purchase purchase) { 
 		Set<Order> set=new HashSet<>();
+		
 		Order order = purchase.getOrder();
 	    String orderTrackingNumber = generateOrderTrackingNumber();
 	    order.setOrderTrackingNumber(orderTrackingNumber);
@@ -31,12 +32,12 @@ public class CheckoutServiceIml  implements CheckoutService{
 //	    orderItems.forEach(item->order.add(item));
 	    order.setBillingAddress(purchase.getBillingAddress());
 	    order.setShippingAddress(purchase.getShippingAddress());
-	    Customer customer = purchase.getCustomer();
-	    order.setCus(customer);
+//	    Customer customer = purchase.getCustomer();
+//	    order.setCus(customer);
 //	    customer.add(order);
 	    set.add(order);
-	    customer.setOrders(set);
-	    customerRepo.save(customer); // Save the Customer first
+//	    customer.setOrders(set);
+//	    customerRepo.save(customer); // Save the Customer first
 
 	    return new PurchaseResponse(orderTrackingNumber);
 		

@@ -1,0 +1,60 @@
+<div class="login-form-flex">
+    <mat-card style="height: 100%;width: 100%;">
+        <mat-card-title style="margin: auto;">
+            Login
+        </mat-card-title>
+        <mat-card-content style="margin: auto;">
+            <form [formGroup]="form">
+                <div style="height:140px;">
+                    <div style="height: 80px;">
+                        <mat-form-field style="width: -webkit-fill-available;">
+                            <input matInput formControlName="username" placeholder="Password">
+                        </mat-form-field>
+
+                    </div>
+                    <div style="height: 80px;">
+                        <mat-form-field>
+                            <input matInput formControlName="password" placeholder="Confirm Password" />
+                        </mat-form-field>
+
+                    </div>
+                </div>
+            </form>
+
+        </mat-card-content>
+        <a style="display: flex;justify-content: end;color:blue; padding-right: 30px; text-decoration: none;"
+            href="#">forgot
+            password?</a>
+        <mat-card-actions>
+            <div class="button-flex-container;" style="margin: auto;">
+                <button mat-raised-button color="primary" (click)="onSubmit()">Login</button>
+            </div>
+        </mat-card-actions>
+        <div style="margin: auto;">New to Site?<button (click)="register()"
+                style="color:blue;text-decoration: none;">Join
+                now</button></div>
+    </mat-card>
+</div>
+
+
+<!--  ---------- -->
+<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div style="height:185px;">
+        <div style="height: 80px;">
+            <mat-form-field style="width: -webkit-fill-available;">
+                <input matInput formControlName="username" placeholder="Password">
+            </mat-form-field>
+
+        </div>
+        <div style="height: 80px;">
+            <mat-form-field>
+                <input matInput formControlName="password" placeholder="Confirm Password" />
+            </mat-form-field>
+
+        </div>
+    </div>
+    <div class="button-flex-container;" style="display:flex;justify-content: center;">
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+</form>
+</div> -->

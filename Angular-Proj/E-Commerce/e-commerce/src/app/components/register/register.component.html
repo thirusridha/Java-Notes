@@ -1,0 +1,85 @@
+<h2 mat-dialog-title style="margin: auto;">Register</h2>
+<form [formGroup]="form" style="margin: auto;">
+    <div style="display:flex;gap:10px;height: 80px;">
+        <div>
+            <mat-form-field>
+                <input matInput [(ngModel)]="firstName" placeholder="First Name" formControlName="firstName">
+            </mat-form-field>
+            <div *ngIf="isSubmitted || form.get('firstName')?.touched">
+                <mat-error
+                    *ngIf="form.get('firstName')?.hasError('required') || form.get('firstName')?.hasError('notOnlyWhiteSpace')"
+                    class="">
+                    *First Name is required
+                </mat-error>
+
+            </div>
+        </div>
+        <div>
+            <mat-form-field>
+                <input [(ngModel)]="lastName" matInput placeholder="Last Name" formControlName="lastName" required>
+            </mat-form-field>
+            <div *ngIf="isSubmitted || form.get('lastName')?.touched">
+                <mat-error
+                    *ngIf="form.get('lastName')?.hasError('required') || form.get('lastName')?.hasError('notOnlyWhiteSpace')"
+                    class="">
+                    *Last Name is required
+                </mat-error>
+            </div>
+        </div>
+    </div>
+    <div style="display:flex;gap:10px;height: 80px;">
+        <div>
+            <mat-form-field>
+                <input type="email" [(ngModel)]="email" matInput placeholder="Email" formControlName="email" required>
+            </mat-form-field>
+            <div *ngIf="isSubmitted || form.get('email')?.touched">
+                <mat-error *ngIf="form.get('email')?.hasError('required') || form.get('email')?.hasError('email')">
+                    *Valid Email is required
+                </mat-error>
+                <mat-error *ngIf="form.get('email')?.hasError('pattern')">
+                    *Invalid email format
+                </mat-error>
+            </div>
+        </div>
+        <div>
+            <mat-form-field>
+                <input type="text" [(ngModel)]="location" matInput placeholder="Location" formControlName="location">
+            </mat-form-field>
+        </div>
+
+    </div>
+    <div style="display:flex;gap:10px;;height: 80px;">
+        <div>
+            <mat-form-field>
+                <input type="number" [(ngModel)]="age" matInput placeholder="Age" formControlName="age">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Gender</mat-label>
+                <select [(ngModel)]="gender" formControlName="gender" matNativeControl required>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+            </mat-form-field>
+            <div *ngIf="isSubmitted || form.get('firstName')?.touched">
+                <mat-error *ngIf="form.get('gender')?.hasError('required')">
+                    *Gender is required
+                </mat-error>
+            </div>
+
+        </div>
+
+
+    </div>
+</form>
+<div style="display: flex; justify-content: space-between; padding-bottom: 15px; padding-inline: 10px;">
+    <div>
+        <button mat-raised-button (click)="closeDialog()" color="primary">Cancel</button>
+    </div>
+    <div>
+        <button (click)="passwordDialog()" mat-raised-button color="primary">
+            <span>Next<mat-icon style="margin-bottom: -7px;">arrow_right_alt</mat-icon></span>
+        </button>
+    </div>
+</div>
