@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Customer } from '../common/customer';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -11,15 +11,27 @@ export class CustomerService {
 
 
   private baseUrl = 'http://localhost:8080';
-  constructor(private httpClient: HttpClient) { }
-  saveCustomer(customer: Customer): Observable<any> {
+  isLoggedInSubject: Subject<boolean> = new BehaviorSubject<boolean>(false);
+  // isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-    return this.httpClient.post<Customer>(`${this.baseUrl}/checkout/save-customer`, customer, { responseType: 'json' });
+  constructor(private httpClient: HttpClient) { }
+
+  login() {
+    this.isLoggedInSubject.next(true);
+  }
+
+  logout() {
+    this.isLoggedInSubject.next(false);
+  }
+
+  // isLoggedIn(): boolean {
+  // return this.isLoggedInSubject.value;
+  // }
+  saveCustomer(customer: Customer): Observable<any> {
+    debugger
+    return this.httpClient.post<Customer>(`${this.baseUrl}/checkout/register`, customer, { responseType: 'json' });
   }
   retrieveCustomerData(data: any): any {
-    debugger
-    console.log(data.username);
-    debugger
-    return this.httpClient.get<Customer>(`${this.baseUrl}/customers/search/findByEmailAndPassword?email=${data.username}&password=${data.password}`);
+    return this.httpClient.post<Customer>(`${this.baseUrl}/checkout/login`, data);
   }
 }

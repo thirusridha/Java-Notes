@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +13,5 @@ import com.example.demo.entity.Customer;
 @RepositoryRestResource
 public interface CustomerRepo extends JpaRepository<Customer,Long> {
 	Customer findByEmailAndPassword(@Param("email") String code,@Param("password") String password);
+	Optional<Customer> findByUsername(String username);
 }

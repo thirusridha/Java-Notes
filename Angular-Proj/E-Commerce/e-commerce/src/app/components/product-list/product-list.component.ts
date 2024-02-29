@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CartStatusComponent } from '../cart-status/cart-status.component';
 import { CartItem } from '../../common/cart-item';
 import { CartService } from '../../services/cart.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-product-list',
@@ -22,7 +23,7 @@ export class ProductListComponent {
   thePageSize: number = 5;
   theTotalElements: number = 0;
   previousKeyword: string = "";
-  constructor(private cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private router: Router) {
+  constructor(private loginComponent: LoginComponent, private cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private router: Router) {
     debugger
   }
   ngOnInit() {
@@ -95,9 +96,18 @@ export class ProductListComponent {
     this.listProduct();
   }
   addToCart(theProduct: Product) {
+
     debugger
-    // console.log(`adding to the card ${theProduct.name},${theProduct.unitPrice}`)
-    const theCartItem = new CartItem(theProduct);
-    this.cartService.addToCart(theCartItem);
+    let tkn = localStorage.getItem('token');
+    if (tkn == null) {
+      debugger
+      this.loginComponent.onButtonClick();
+      // alert('add to cart is ')
+    } if (tkn != null) {
+      debugger
+      const theCartItem = new CartItem(theProduct);
+      this.cartService.addToCart(theCartItem);
+    }
+
   }
 }

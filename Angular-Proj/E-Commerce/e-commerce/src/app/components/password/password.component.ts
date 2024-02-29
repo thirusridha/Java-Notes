@@ -17,6 +17,7 @@ import { Customer } from '../../common/customer';
 export class PasswordComponent {
   constructor(private customerService: CustomerService, private fb: FormBuilder, private login: LoginPageComponent, private dataService: DataService, private router: Router) { }
   form!: FormGroup;
+  username!: any;
   password!: any;
   confirmPassowrd!: any;
   isSubmitted = false;
@@ -24,6 +25,7 @@ export class PasswordComponent {
   customerData!: Customer;
   ngOnInit() {
     this.form = this.fb.group({
+      username: ['', Validators.required],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
       confirmPassword: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
     }, { validator: this.checkPasswords });
@@ -60,9 +62,11 @@ export class PasswordComponent {
       );
       debugger
       this.customer = this.customerData;
+      this.customer.username = this.username;
       this.customer.password = this.password;
       this.customerService.saveCustomer(this.customer).subscribe(
         (response: any) => {
+          debugger
           console.log('Successfully saved customer:', response);
           alert('Successfully saved customer');
           window.location.reload();

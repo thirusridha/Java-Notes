@@ -22,6 +22,7 @@ export class RegisterComponent {
   location!: any;
   age!: any;
   gender!: any;
+  role: any = "USER";
   isSubmitted: boolean = false;
   constructor(
     private dialog: MatDialog,
@@ -37,7 +38,8 @@ export class RegisterComponent {
       email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
       location: new FormControl('', []),
       age: new FormControl(['', Validators.required]),
-      gender: new FormControl(['', Validators.required])
+      gender: new FormControl(['', Validators.required]),
+      role: new FormControl()
     });
   }
   ngOnInit() {
@@ -53,6 +55,7 @@ export class RegisterComponent {
         this.location = data.location;
         this.age = data.age;
         this.gender = data.gender;
+
       }
     )
 
@@ -73,6 +76,7 @@ export class RegisterComponent {
       return;
     } else {
       debugger
+      this.form.value.role = "USER";
       this.dataService.submitToPwd(this.form.value);
       console.log(this.form.value)
       this.dialog.closeAll();

@@ -2,6 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginPageComponent } from '../login-page/login-page.component';
 import { RegisterComponent } from '../register/register.component';
+import { CustomerService } from '../../services/customer.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -10,16 +12,42 @@ import { RegisterComponent } from '../register/register.component';
 })
 
 export class LoginComponent {
+
+  isLoggedIn!: boolean;
   constructor(
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private customerService: CustomerService,
+    private cartService: CartService
+  ) {
+    this.customerService.isLoggedInSubject.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+    });
+  }
   Openpopup() {
     this.dialog.open(LoginPageComponent, {
       width: '28%',
       height: '400px'
     })
   }
+  closeLoginPopup() {
+    this.dialog.closeAll();
+    this.customerService.login();
+  }
+  onButtonClick() {
+    debugger
+    if (this.isLoggedIn) {
+      localStorage.removeItem('token');
+      // this.cartService.cartItems.push();
+      this.cartService.totalPrice.next(0);
+      this.cartService.totalQuantity.next(0);
+      this.customerService.logout();
+
+    } else {
+      this.Openpopup();
+    }
+  }
   registerPopup() {
+
     this.dialog.closeAll();
     this.dialog.open(RegisterComponent, {
       width: '40%',

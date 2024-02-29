@@ -42,13 +42,12 @@ export class LoginPageComponent {
     this.customerService.retrieveCustomerData(this.myData).subscribe(
       (data: any) => {
         debugger
-        this.router.navigate([`/products/user/${data.id}`]);
-        // console.log(data);
-        // console.log(data.id);
+        localStorage.setItem('token', JSON.stringify(data));
+        this.loginComponent.closeLoginPopup();
       },
       (error: any) => {
         debugger
-        console.error('Error retrieving customer data:', error);
+        alert('Invalid Credentials...')
       }
     )
   }

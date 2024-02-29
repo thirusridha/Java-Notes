@@ -10,20 +10,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.Purchase;
 import com.example.demo.dto.PurchaseResponse;
+import com.example.demo.entity.AuthenticationResponse;
 import com.example.demo.entity.Customer;
+import com.example.demo.service.AuthenticationService;
 import com.example.demo.service.CheckoutService;
 import com.example.demo.service.SaveCustomerService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/checkout")
 public class CheckOutController {
-	@Autowired
-	private CheckoutService checkoutService;
-	@Autowired
-	private SaveCustomerService saveCustomerService;
+	private final CheckoutService checkoutService;
+	private final SaveCustomerService saveCustomerService;
+	private final AuthenticationService authenticationService;
+	
+public CheckOutController(CheckoutService checkoutService, SaveCustomerService saveCustomerService,
+			AuthenticationService authenticationService) {
+		this.checkoutService = checkoutService;	
+		this.saveCustomerService = saveCustomerService;
+		this.authenticationService = authenticationService;
+	}
 
 //	@PostMapping("/purchase")
 //	public PurchaseResponse placeOrder(@RequestBody Purchase purchase){
@@ -36,4 +42,25 @@ public class CheckOutController {
 		
 	}
 	
+//	@PostMapping("/register")
+//	public ResponseEntity<AuthenticationResponse> register(@RequestBody Customer request){
+//		return ResponseEntity.ok(authenticationService.register(request));
+//		
+//	}
+//	@PostMapping("/login")
+//	public ResponseEntity<AuthenticationResponse> login(@RequestBody Customer request){
+//		return ResponseEntity.ok(authenticationService.authenticate(request));
+//		
+//	}
+
+	@PostMapping("/register")
+	public ResponseEntity<AuthenticationResponse> register(@RequestBody Customer request){
+		return ResponseEntity.ok(authenticationService.register(request));
+		
+	}
+	@PostMapping("/login")
+	public ResponseEntity<AuthenticationResponse> login(@RequestBody Customer request){
+		return ResponseEntity.ok(authenticationService.authenticate(request));
+		
+	}
 }

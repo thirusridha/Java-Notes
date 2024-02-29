@@ -1,6 +1,13 @@
 package com.example.demo.entity;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,36 +22,46 @@ import lombok.ToString;
 @Table
 @Entity 
 @ToString
-public class Customer {
+public class Customer implements UserDetails {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String firstName;
 	private String lastName;
+	private String username;
 	private String email;
 	private String location;
 	private Integer age;
 	private String gender;
 	private String password;
-//	@OneToMany(mappedBy = "cus",cascade = CascadeType.ALL)
-//	private Set<Order> orders = new HashSet<>();
-//	
-//	public void add(Order order) {
-//		System.out.println(order);
-//		if(order!=null) {
-//			if(orders == null) {
-//				orders=new HashSet<>();
-//				System.out.println(orders);
-//			}
-//			System.out.println(order);
-//			 if (!orders.contains(order)) {
-//			        orders.add(order);
-//			        order.setCus(this); // Set the customer on the order
-//			    }else {
-//		            System.out.println("Order already belongs to this customer. Avoiding recursive loop.");
-//		        }
-//		}else {
-//			System.out.println("failed");
-//		}
-//	}
+	Role role;
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return List.of(new SimpleGrantedAuthority(role.name()));
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
