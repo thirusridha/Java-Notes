@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 @Entity
@@ -29,7 +30,7 @@ public class Product {
 	@Column(name="name")
 	private String name;
 	@Column(name="description")
-	private String description;
+	private String description;																																																																																						
 	@Column(name="unit_price")
 	private BigDecimal unitPrice;
 	@Column(name="image_url")
@@ -47,4 +48,8 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private ProductCategory category;
+	@Transient
+	private Integer count;
+	@Transient
+	private String valueOnButton;
 }

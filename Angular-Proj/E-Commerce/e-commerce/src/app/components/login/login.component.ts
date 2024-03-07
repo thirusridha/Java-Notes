@@ -4,6 +4,7 @@ import { LoginPageComponent } from '../login-page/login-page.component';
 import { RegisterComponent } from '../register/register.component';
 import { CustomerService } from '../../services/customer.service';
 import { CartService } from '../../services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
   constructor(
     private dialog: MatDialog,
     private customerService: CustomerService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {
     this.customerService.isLoggedInSubject.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
@@ -41,6 +43,7 @@ export class LoginComponent {
       this.cartService.totalPrice.next(0);
       this.cartService.totalQuantity.next(0);
       this.customerService.logout();
+      this.router.navigateByUrl('/products')
 
     } else {
       this.Openpopup();

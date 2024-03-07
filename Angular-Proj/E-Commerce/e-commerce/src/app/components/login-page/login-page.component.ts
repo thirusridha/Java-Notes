@@ -4,7 +4,7 @@ import { RegisterComponent } from '../register/register.component';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
 import { Router } from '@angular/router';
-
+import * as jwt_decode from "jwt-decode";
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -43,12 +43,17 @@ export class LoginPageComponent {
       (data: any) => {
         debugger
         localStorage.setItem('token', JSON.stringify(data));
+        const decodedToken: any = jwt_decode.jwtDecode(data.token);
+        console.log(decodedToken.id);
         this.loginComponent.closeLoginPopup();
+        this.customerService.setUserId(decodedToken.id);
+        this.router.navigateByUrl(`/products/user/${decodedToken.id}`);
       },
       (error: any) => {
         debugger
-        alert('Invalid Credentials...')
+        alert('Invalid Credentials...');
       }
     )
   }
 }
+

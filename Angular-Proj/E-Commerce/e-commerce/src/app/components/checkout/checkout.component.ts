@@ -35,13 +35,13 @@ export class CheckoutComponent {
   ngOnInit() {
     this.reviewCartDetails();
     this.checkoutFormGroup = this.formBuilder.group({
-      customer: this.formBuilder.group({
-        firstName: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2), FormValidators.notOnlyWhiteSpace]),
-        lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
-      }),
+      // customer: this.formBuilder.group({
+      //   firstName: new FormControl('', [
+      //     Validators.required,
+      //     Validators.minLength(2), FormValidators.notOnlyWhiteSpace]),
+      //   lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      //   email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
+      // }),
       shippingAddress: this.formBuilder.group({
         street: new FormControl('', [
           Validators.required,
@@ -107,9 +107,9 @@ export class CheckoutComponent {
     );
   }
 
-  get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
-  get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
-  get email() { return this.checkoutFormGroup.get('customer.email'); }
+  // get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
+  // get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
+  // get email() { return this.checkoutFormGroup.get('customer.email'); }
   get shippingAddressStreet() { return this.checkoutFormGroup.get('shippingAddress.street'); }
   get shippingAddressCity() { return this.checkoutFormGroup.get('shippingAddress.city'); }
   get shippingAddressState() { return this.checkoutFormGroup.get('shippingAddress.state'); }
@@ -164,7 +164,7 @@ export class CheckoutComponent {
       // setup purchase
       let purchase = new Purchase();
       // populate purchase -customer
-      purchase.customer = this.checkoutFormGroup.controls['customer'].value;
+      // purchase.customer = this.checkoutFormGroup.controls['customer'].value;
 
       // populate purchase -shipping address
       purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;

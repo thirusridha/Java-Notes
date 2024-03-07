@@ -48,8 +48,10 @@ public class JwtService {
 	}
 
 	public String generateToken(Customer customer) {
-		String token = Jwts.builder().subject(customer.getUsername()).issuedAt(new Date(System.currentTimeMillis()))
-				.expiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000)).signWith(getSigninKey())
+		String token = Jwts.builder().subject(customer.getUsername())
+				.claim("id", customer.getId())				
+				.issuedAt(new Date(System.currentTimeMillis()))
+				.expiration(new Date(System.currentTimeMillis() + 60 *2000)).signWith(getSigninKey())
 				.compact();
 		return token;
 	}

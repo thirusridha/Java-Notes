@@ -32,7 +32,15 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(AbstractHttpConfigurer::disable)
-				.authorizeHttpRequests(req -> req.requestMatchers("/checkout/register/**","/products/**","/checkout/login/**").permitAll().
+				.authorizeHttpRequests(req -> req.requestMatchers(
+						"/checkout/register/**",
+						"/checkout/**",
+						"/checkout/purchase",
+						"/products/**",
+						"/checkout/login/**",
+						"product-category/**",
+						"/countries/**",
+						"/states/**").permitAll().
 						requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
 						.anyRequest().authenticated())
 				.userDetailsService(userDetailsServiceImp)

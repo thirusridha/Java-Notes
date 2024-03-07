@@ -14,4 +14,5 @@ import com.example.demo.entity.Customer;
 public interface CustomerRepo extends JpaRepository<Customer,Long> {
 	Customer findByEmailAndPassword(@Param("email") String code,@Param("password") String password);
 	Optional<Customer> findByUsername(String username);
+	Customer findById(Integer id);
 }

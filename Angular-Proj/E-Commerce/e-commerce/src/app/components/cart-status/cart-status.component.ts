@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../common/cart-item';
 import { Router } from '@angular/router';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-cart-status',
@@ -12,9 +13,17 @@ export class CartStatusComponent {
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
   cartItems!: CartItem;
-  constructor(private cartService: CartService, private router: Router) { }
+  userId!: any;
+  constructor(private cartService: CartService, private router: Router, private customerService: CustomerService) { }
   ngOnInit() {
     debugger
+    this.customerService.userId.subscribe(
+      data => {
+        debugger
+        console.log(data);
+        this.userId = data;
+      }
+    )
     this.updateCartStatus();
   }
 

@@ -3,6 +3,6 @@ import com.example.demo.dto.Purchase;
 import com.example.demo.dto.PurchaseResponse;
 //@Service
 public interface CheckoutService {
-	PurchaseResponse placeOrder(Purchase purchase);
+	PurchaseResponse placeOrder(Purchase purchase, Integer id);
 	
 }

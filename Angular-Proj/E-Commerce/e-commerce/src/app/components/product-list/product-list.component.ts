@@ -15,6 +15,8 @@ import { LoginComponent } from '../login/login.component';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent {
+  buttonValue: any = "Add to Cart";
+  count: any;
   products: Product[] = [];
   currentCategoryId: number = 1;
   previousCategoryId: number = 1;
@@ -25,6 +27,15 @@ export class ProductListComponent {
   previousKeyword: string = "";
   constructor(private loginComponent: LoginComponent, private cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private router: Router) {
     debugger
+    // this.cartService.totalPrice.subscribe(
+    //   data => {
+    //     // this.cartStatus.totalPrice = data;
+    //   }
+    // )
+    this.productService.count.subscribe(
+      data => this.count = data
+    )
+
   }
   ngOnInit() {
     debugger
@@ -32,6 +43,45 @@ export class ProductListComponent {
       this.listProduct();
     })
 
+  }
+  incrementByOne(theProduct: Product) {
+    debugger
+    if (theProduct.count == null) {
+      // theProduct.count = theProduct.valueOnbutton;
+      theProduct.count = 1;
+      this.productService.addCount(theProduct.count);
+    } else {
+      theProduct.count = theProduct.count + 1;
+      this.productService.addCount(theProduct.count);
+      console.log(theProduct);
+    }
+    let tkn = localStorage.getItem('token');
+    if (tkn == null) {
+      debugger
+      this.loginComponent.onButtonClick();
+      // alert('add to cart is ')
+    } if (tkn != null) {
+      debugger
+      const theCartItem = new CartItem(theProduct);
+      this.cartService.addToCart(theCartItem);
+      this.cartService
+    }
+    // theProduct.count++;
+  }
+  decrementByOne(theProduct: Product) {
+    this.buttonValue = theProduct.count--;
+    let tkn = localStorage.getItem('token');
+    if (tkn == null) {
+      debugger
+      this.loginComponent.onButtonClick();
+      // alert('add to cart is ')
+    } if (tkn != null) {
+      debugger
+      const theCartItem = new CartItem(theProduct);
+      theCartItem.quantity = theProduct.count;
+      // this.cartService.decreamentQuantity(theCartItem);
+      this.cartService.computeCartTotal(theCartItem);
+    }
   }
   listProduct() {
     debugger
@@ -54,11 +104,17 @@ export class ProductListComponent {
   processResult() {
     debugger
     return (data: any) => {
+      console.log(data);
+      let pr = Product;
       debugger
       this.products = data._embedded.product;
       this.thePageNumber = data.page.number + 1;
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
+      // this.cartItems.findIndex(tempCartItem => tempCartItem.id === cartItem.id);
+      // this.product=this.products.findIndex(data=>data.id===this.products.id);
+      // pr = this.products.find(tempCartItem => tempCartItem.id === this.products);
+      this.products[0].count = 0;
     };
   }
   handleListProduct() {
@@ -96,18 +152,9 @@ export class ProductListComponent {
     this.listProduct();
   }
   addToCart(theProduct: Product) {
-
+    this.incrementByOne(theProduct);
     debugger
-    let tkn = localStorage.getItem('token');
-    if (tkn == null) {
-      debugger
-      this.loginComponent.onButtonClick();
-      // alert('add to cart is ')
-    } if (tkn != null) {
-      debugger
-      const theCartItem = new CartItem(theProduct);
-      this.cartService.addToCart(theCartItem);
-    }
+
 
   }
 }

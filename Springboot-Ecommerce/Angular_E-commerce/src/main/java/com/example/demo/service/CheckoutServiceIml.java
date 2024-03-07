@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.dao.CustomerRepo;
+import com.example.demo.dao.OrderRepo;
 import com.example.demo.dto.Purchase;
 import com.example.demo.dto.PurchaseResponse;
 import com.example.demo.entity.Customer;
@@ -14,16 +15,19 @@ import jakarta.transaction.Transactional;
 @Service
 public class CheckoutServiceIml  implements CheckoutService{
 	@Autowired	
+	private OrderRepo orderRepo;
+	@Autowired
 	private CustomerRepo customerRepo;
-	public CheckoutServiceIml(CustomerRepo customerRepo) {
-		this.customerRepo=customerRepo;
+	public CheckoutServiceIml(OrderRepo orderRepo) {
+		this.orderRepo=orderRepo;
 			}	
 	@Override
 	@Transactional
-	public PurchaseResponse placeOrder(Purchase purchase) { 
+	public PurchaseResponse placeOrder(Purchase purchase,Integer id) { 
 		Set<Order> set=new HashSet<>();
 		
 		Order order = purchase.getOrder();
+		Customer customer=customerRepo.findById(id);
 	    String orderTrackingNumber = generateOrderTrackingNumber();
 	    order.setOrderTrackingNumber(orderTrackingNumber);
 	    Set<OrderItem> orderItems = purchase.getOrderItems();
@@ -35,10 +39,12 @@ public class CheckoutServiceIml  implements CheckoutService{
 //	    Customer customer = purchase.getCustomer();
 //	    order.setCus(customer);
 //	    customer.add(order);
+	    order.setCustomer(customer);
 	    set.add(order);
 //	    customer.setOrders(set);
-//	    customerRepo.save(customer); // Save the Customer first
-
+//	    customerRepo.save(customer); // Save the Customer first 
+	    
+	    orderRepo.save(order);
 	    return new PurchaseResponse(orderTrackingNumber);
 		
 //		Set<Order> o=new HashSet<>();

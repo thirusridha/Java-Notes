@@ -12,7 +12,13 @@
                         </a>
 
                         <h2 style="color: tomato;font-size: x-large;">${{tempProduct.unitPrice}}</h2>
-                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
+                        <button style="width: 30px;" (click)="decrementByOne(tempProduct)">{{ tempProduct.count > 0
+                            ? '-' :'' }}</button>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">{{
+                            tempProduct.count <= 0 ? 'Add To Cart' : tempProduct.count }} </button>
+
+                                <button style="width: 30px;" (click)="incrementByOne(tempProduct)">{{
+                                    tempProduct.count >0 ? '+' :''}}</button>
                     </div>
                 </div>
                 <div *ngIf="products?.length==0" class="alert alert-warning">

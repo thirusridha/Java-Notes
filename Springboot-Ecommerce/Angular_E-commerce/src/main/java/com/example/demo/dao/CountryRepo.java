@@ -8,5 +8,5 @@ import com.example.demo.entity.Country;
 @CrossOrigin("http://localhost:4200/products")
 @RepositoryRestResource(collectionResourceRel = "countries",path = "countries")
 public interface CountryRepo extends JpaRepository<Country, Integer>{
-
+	
 }

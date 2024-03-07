@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../common/product';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import { ProductCategory } from '../common/product-category';
 
 @Injectable({
@@ -10,6 +10,10 @@ import { ProductCategory } from '../common/product-category';
 export class ProductService {
   private baseUrl = 'http://localhost:8080/products';
   private categoryUrl = 'http://localhost:8080/product-category';
+  count: Subject<any> = new BehaviorSubject<any>(0);
+  addCount(count: any) {
+    this.count.next(count);
+  }
   constructor(private httpClient: HttpClient) { }
   getProductList(theCategoryId: number): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`

@@ -10,6 +10,7 @@ export class CheckoutService {
   private purchaseUrl = 'http://localhost:8080/checkout/purchase';
   constructor(private httpClient: HttpClient) { }
   placeOrder(purchase: Purchase): Observable<any> {
+    debugger
     return this.httpClient.post<Purchase>(this.purchaseUrl, purchase);
   }
 }

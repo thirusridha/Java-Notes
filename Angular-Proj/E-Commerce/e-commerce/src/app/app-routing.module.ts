@@ -9,14 +9,15 @@ import { ProductService } from './services/product.service';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
+import { authGuard } from './services/auth.guard';
 // const oktaConfig = myAppConfig.oidc;     
 // const oktaAuth = new OktaAuth(oktaConfig);
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'products/user/:id', component: ProductListComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'cart-details', component: CartDetailsComponent },
-  { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'products/user/:user-id', component: ProductListComponent },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
+  { path: 'user/:user-id/cart-details', component: CartDetailsComponent, canActivate: [authGuard] },
+  { path: 'products/:id', component: ProductListComponent },
   { path: 'search/:keyword', component: ProductListComponent },
   { path: 'category/:id', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },

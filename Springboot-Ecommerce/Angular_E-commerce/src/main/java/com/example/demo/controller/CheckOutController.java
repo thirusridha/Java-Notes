@@ -4,6 +4,7 @@ import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,17 +32,16 @@ public CheckOutController(CheckoutService checkoutService, SaveCustomerService s
 		this.authenticationService = authenticationService;
 	}
 
-//	@PostMapping("/purchase")
-//	public PurchaseResponse placeOrder(@RequestBody Purchase purchase){
-//			PurchaseResponse purchaseResponse= checkoutService.placeOrder(purchase);
-//			 return purchaseResponse;
-//	}
+	@PostMapping("/purchase/{id}")
+	public PurchaseResponse placeOrder(@RequestBody Purchase purchase,@PathVariable Integer id){
+			PurchaseResponse purchaseResponse= checkoutService.placeOrder(purchase,id);
+			 return purchaseResponse;
+	}
 	@PostMapping("/save-customer")
-	public String saveCustomer(@RequestBody Customer customer) {
+	public String saveCustomer(@RequestBody Customer customer	) {
 		return saveCustomerService.saveCustomer(customer);
 		
 	}
-	
 //	@PostMapping("/register")
 //	public ResponseEntity<AuthenticationResponse> register(@RequestBody Customer request){
 //		return ResponseEntity.ok(authenticationService.register(request));
