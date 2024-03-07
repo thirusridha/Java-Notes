@@ -10,6 +10,20 @@ export class CartService {
   cartItems: CartItem[] = [];
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
+  idAndCount: Subject<any[]> = new BehaviorSubject<any[]>([]);
+  addIdAndCount(ids: any, counts: any) {
+    debugger
+    let myObject: { id: string; count: number; } = {
+      id: ids,
+      count: counts + 1
+    };
+    this.idAndCount.pipe(
+
+    )
+    // myObject = this.idAndCount;
+    // this.idAndCount.next(myObject);
+    console.log(this.idAndCount);
+  }
   constructor() {
   }
   addToCart(theCartItem: CartItem) {
@@ -40,14 +54,14 @@ export class CartService {
     for (let currentCartItem of this.cartItems) {
       debugger
       if (currentCartItem.id == theCartItem.id)
-        currentCartItem.quantity--;
-      if (currentCartItem.quantity === 0) {
-        debugger
-        this.removeOne(currentCartItem);
-      } else {
+        //   currentCartItem.quantity--;
+        // if (currentCartItem.quantity === 0) {
+        //   debugger
+        //   this.removeOne(currentCartItem);
+        // } else {
         totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
-        totalQuantityValue += currentCartItem.quantity;
-      }
+      totalQuantityValue += currentCartItem.quantity;
+      // }
     }
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);

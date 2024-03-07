@@ -42,6 +42,7 @@ export class CartStatusComponent {
         this.totalQuantity = data
       }
     )
+
     // console.log(`total price - ${this.totalPrice}`)
   }
 

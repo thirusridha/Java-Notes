@@ -11,9 +11,11 @@ export class ProductService {
   private baseUrl = 'http://localhost:8080/products';
   private categoryUrl = 'http://localhost:8080/product-category';
   count: Subject<any> = new BehaviorSubject<any>(0);
+
   addCount(count: any) {
     this.count.next(count);
   }
+
   constructor(private httpClient: HttpClient) { }
   getProductList(theCategoryId: number): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`

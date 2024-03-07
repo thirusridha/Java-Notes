@@ -45,6 +45,7 @@ export class ProductListComponent {
 
   }
   incrementByOne(theProduct: Product) {
+    this.cartService.addIdAndCount(theProduct.id, theProduct.count);
     debugger
     if (theProduct.count == null) {
       // theProduct.count = theProduct.valueOnbutton;
@@ -79,8 +80,11 @@ export class ProductListComponent {
       debugger
       const theCartItem = new CartItem(theProduct);
       theCartItem.quantity = theProduct.count;
-      // this.cartService.decreamentQuantity(theCartItem);
-      this.cartService.computeCartTotal(theCartItem);
+      if (theCartItem.quantity == 0) {
+        this.cartService.remove(theCartItem);
+      } else
+        // this.cartService.decreamentQuantity(theCartItem);
+        this.cartService.computeCartTotal(theCartItem);
     }
   }
   listProduct() {
@@ -111,11 +115,12 @@ export class ProductListComponent {
       this.thePageNumber = data.page.number + 1;
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
-      // this.cartItems.findIndex(tempCartItem => tempCartItem.id === cartItem.id);
-      // this.product=this.products.findIndex(data=>data.id===this.products.id);
-      // pr = this.products.find(tempCartItem => tempCartItem.id === this.products);
-      this.products[0].count = 0;
+      // this.products[0].count = 5;
     };
+  }
+  cartList() {
+    debugger
+    // this.router.navigateByUrl('/product/tempid')
   }
   handleListProduct() {
     debugger

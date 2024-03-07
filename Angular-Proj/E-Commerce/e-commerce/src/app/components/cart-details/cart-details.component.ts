@@ -42,6 +42,12 @@ export class CartDetailsComponent {
       }
 
     );
+    this.cartService.idAndCount.subscribe(
+      data => {
+        debugger
+        console.log(data);
+      }
+    );
     this.cartService.computeCartTotals();
 
   }
