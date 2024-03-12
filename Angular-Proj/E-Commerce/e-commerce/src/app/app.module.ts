@@ -61,7 +61,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatIconModule,
     MatGridListModule
   ],
-  providers: [LoginComponent, RegisterComponent, LoginPageComponent],
+  providers: [LoginComponent, RegisterComponent, LoginPageComponent, ProductListComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

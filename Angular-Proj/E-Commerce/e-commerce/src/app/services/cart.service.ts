@@ -10,19 +10,30 @@ export class CartService {
   cartItems: CartItem[] = [];
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
-  idAndCount: Subject<any[]> = new BehaviorSubject<any[]>([]);
-  addIdAndCount(ids: any, counts: any) {
+  idAndCount: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  addIdAndCount(ids: any, counts: any, check: string) {
     debugger
-    let myObject: { id: string; count: number; } = {
-      id: ids,
-      count: counts + 1
-    };
-    this.idAndCount.pipe(
-
-    )
-    // myObject = this.idAndCount;
-    // this.idAndCount.next(myObject);
+    let newData!: any[];
+    if (check.match('increase')) {
+      newData = [{ id: ids, count: counts + 1 }];
+    } else if (check.match('decrease')) {
+      newData = [{ id: ids, count: counts - 1 }];
+    }
+    const currentData = this.idAndCount.getValue();
+    newData.forEach(newEntry => {
+      const index = currentData.findIndex(existingEntry => existingEntry.id === newEntry.id);
+      if (index !== -1) {
+        currentData[index] = { ...currentData[index], ...newEntry };
+      } else {
+        currentData.push(newEntry);
+      }
+    })
+  }
+  removeCount() {
+    this.idAndCount.next([]);
+    this.idAndCount.closed;
     console.log(this.idAndCount);
+
   }
   constructor() {
   }
@@ -54,12 +65,12 @@ export class CartService {
     for (let currentCartItem of this.cartItems) {
       debugger
       if (currentCartItem.id == theCartItem.id)
-        //   currentCartItem.quantity--;
-        // if (currentCartItem.quantity === 0) {
-        //   debugger
-        //   this.removeOne(currentCartItem);
-        // } else {
-        totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
+        currentCartItem.quantity--;
+      // if (currentCartItem.quantity === 0) {
+      //   debugger
+      //   this.removeOne(currentCartItem);
+      // } else {
+      totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
       totalQuantityValue += currentCartItem.quantity;
       // }
     }
@@ -85,10 +96,7 @@ export class CartService {
     // console.log('content of the cart...')
     for (let tempCartItem of this.cartItems) {
       const subTotalPrice = tempCartItem.quantity * tempCartItem.unitPrice;
-      // console.log(`name ${tempCartItem.name}, quantity ${tempCartItem.quantity} , unitprice ${tempCartItem.unitPrice} subtotal= ${subTotalPrice}`)
     }
-    // console.log(`totalPrice : ${totalPriceValue.toFixed(2)}, totalQuantity : ${totalQuantityValue}`)
-    // console.log('--------------')
   }
   decreamentQuantity(cartItem: CartItem) {
     debugger

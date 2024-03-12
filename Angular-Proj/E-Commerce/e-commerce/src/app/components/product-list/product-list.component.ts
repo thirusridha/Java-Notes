@@ -15,6 +15,8 @@ import { LoginComponent } from '../login/login.component';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent {
+
+  idAndCount: any[] = [];
   buttonValue: any = "Add to Cart";
   count: any;
   products: Product[] = [];
@@ -27,11 +29,6 @@ export class ProductListComponent {
   previousKeyword: string = "";
   constructor(private loginComponent: LoginComponent, private cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private router: Router) {
     debugger
-    // this.cartService.totalPrice.subscribe(
-    //   data => {
-    //     // this.cartStatus.totalPrice = data;
-    //   }
-    // )
     this.productService.count.subscribe(
       data => this.count = data
     )
@@ -45,7 +42,7 @@ export class ProductListComponent {
 
   }
   incrementByOne(theProduct: Product) {
-    this.cartService.addIdAndCount(theProduct.id, theProduct.count);
+    this.cartService.addIdAndCount(theProduct.id, theProduct.count, 'increase');
     debugger
     if (theProduct.count == null) {
       // theProduct.count = theProduct.valueOnbutton;
@@ -70,6 +67,8 @@ export class ProductListComponent {
     // theProduct.count++;
   }
   decrementByOne(theProduct: Product) {
+    debugger
+    this.cartService.addIdAndCount(theProduct.id, theProduct.count, 'decrease');
     this.buttonValue = theProduct.count--;
     let tkn = localStorage.getItem('token');
     if (tkn == null) {
@@ -110,11 +109,28 @@ export class ProductListComponent {
     return (data: any) => {
       console.log(data);
       let pr = Product;
+      let token = localStorage.getItem('token');
       debugger
       this.products = data._embedded.product;
       this.thePageNumber = data.page.number + 1;
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
+      this.cartService.idAndCount.subscribe(data => {
+        // existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.id);
+        data.forEach(data => {
+          debugger
+          const check = this.products.find(record => {
+            debugger
+            if (record.id == data.id && token != null) {
+              this.products[data.id - 1].count = data.count;
+            }
+
+          });
+        });
+      });
+      // this.idAndCount.forEach(data => {
+      //   this.products[data.id].count = data.count;
+      // });
       // this.products[0].count = 5;
     };
   }
@@ -157,8 +173,14 @@ export class ProductListComponent {
     this.listProduct();
   }
   addToCart(theProduct: Product) {
-    this.incrementByOne(theProduct);
-    debugger
+    let token = localStorage.getItem('token');
+    if (token != null)
+      this.incrementByOne(theProduct);
+    else {
+      this.loginComponent.Openpopup();
+      localStorage.setItem('product', JSON.stringify(theProduct));
+      // this.incrementByOne(theProduct);
+    }
 
 
   }

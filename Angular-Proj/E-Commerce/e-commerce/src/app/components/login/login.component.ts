@@ -5,6 +5,7 @@ import { RegisterComponent } from '../register/register.component';
 import { CustomerService } from '../../services/customer.service';
 import { CartService } from '../../services/cart.service';
 import { Router } from '@angular/router';
+import { loc } from '@okta/okta-signin-widget/types/packages/@okta/courage-dist/types';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,11 @@ export class LoginComponent {
     private cartService: CartService,
     private router: Router
   ) {
+    debugger
+    let token = localStorage.getItem('token');
+    if (token != null) {
+      this.customerService.login();
+    }
     this.customerService.isLoggedInSubject.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
     });
@@ -42,7 +48,11 @@ export class LoginComponent {
       // this.cartService.cartItems.push();
       this.cartService.totalPrice.next(0);
       this.cartService.totalQuantity.next(0);
+      this.cartService.removeCount();
       this.customerService.logout();
+      debugger
+      console.log(this.cartService.cartItems);
+      this.cartService.cartItems = [];
       this.router.navigateByUrl('/products')
 
     } else {
