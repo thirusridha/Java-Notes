@@ -27,14 +27,16 @@ public class AuthenticationService {
 	}
 
 	public AuthenticationResponse register(User request) {
-		User user = new User();
-		user.setFirstName(request.getFirstName());
-		user.setLastName(request.getLastName());
-		user.setUsername(request.getUsername());
-		user.setPassword(passwordEncoder.encode(request.getPassword()));
-		user.setRole(request.getRole());
-		user = userRepo.save(user);
-		String token = jwtService.generateToken(user);
+//		User user = new User();
+//		user.setFirstName(request.getFirstName());
+//		user.setLastName(request.getLastName());
+//		user.setUsername(request.getUsername());
+//		user.setPassword(passwordEncoder.encode(request.getPassword()));
+//		user.setRole(request.getRole());
+//		user = userRepo.save(user);
+		request.setPassword(passwordEncoder.encode(request.getPassword()));
+		
+		String token = jwtService.generateToken(userRepo.save(request));
 		return new AuthenticationResponse(token);
 	}
 

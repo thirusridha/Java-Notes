@@ -29,16 +29,16 @@ public class SecurityConfig {
 		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
 	}
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.csrf(AbstractHttpConfigurer::disable)
-				.authorizeHttpRequests(req -> req.requestMatchers("/register/**","/login/**").permitAll().
-						requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-						.anyRequest().authenticated())
-				.userDetailsService(userDetailsServiceImp)
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
-	}
+		@Bean
+		public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+			return http.csrf(AbstractHttpConfigurer::disable)
+					.authorizeHttpRequests(req -> req.requestMatchers("/register/**","/login/**").permitAll().
+							requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+							.anyRequest().authenticated())
+					.userDetailsService(userDetailsServiceImp)
+					.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+					.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
+		}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

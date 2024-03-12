@@ -51,7 +51,7 @@ public class JwtService {
 		String token = Jwts.builder().subject(customer.getUsername())
 				.claim("id", customer.getId())				
 				.issuedAt(new Date(System.currentTimeMillis()))
-				.expiration(new Date(System.currentTimeMillis() + 60 *2000)).signWith(getSigninKey())
+				.expiration(new Date(System.currentTimeMillis() + 24 * 60 * 60*2)).signWith(getSigninKey())
 				.compact();
 		return token;
 	}
