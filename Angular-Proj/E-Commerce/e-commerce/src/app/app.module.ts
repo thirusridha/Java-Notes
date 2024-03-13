@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
@@ -26,6 +26,7 @@ import { PasswordComponent } from './components/password/password.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { customInterceptor } from './services/custom.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatIconModule,
     MatGridListModule
   ],
-  providers: [LoginComponent, RegisterComponent, LoginPageComponent, ProductListComponent],
+  providers: [provideHttpClient(withInterceptors([customInterceptor])), LoginComponent, RegisterComponent, LoginPageComponent, ProductListComponent,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

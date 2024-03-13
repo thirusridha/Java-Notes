@@ -69,6 +69,7 @@ export class LoginPageComponent {
       },
       (error: any) => {
         debugger
+        console.log(error);
         alert('Invalid Credentials...');
       }
     )

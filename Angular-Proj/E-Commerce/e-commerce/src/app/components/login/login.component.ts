@@ -60,7 +60,6 @@ export class LoginComponent {
     }
   }
   registerPopup() {
-
     this.dialog.closeAll();
     this.dialog.open(RegisterComponent, {
       width: '40%',
