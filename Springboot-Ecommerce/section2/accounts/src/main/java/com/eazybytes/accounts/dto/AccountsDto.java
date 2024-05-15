@@ -1,10 +1,8 @@
 package com.eazybytes.accounts.dto;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-
 @Data
 @Schema(
         name = "Accounts",
@@ -12,7 +10,7 @@ import lombok.Data;
 )
 public class AccountsDto {
 
-    @NotEmpty(message = "AccountNumber can not be a null or empty")
+    @NotEmpty(message = "AccountNumber can not be null or empty")
     @Pattern(regexp="(^$|[0-9]{10})",message = "AccountNumber must be 10 digits")
     @Schema(
             description = "Account Number of Eazy Bank account", example = "3454433243"

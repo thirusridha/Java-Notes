@@ -1,0 +1,8 @@
+build:
+ version: "1.O"  
+ 
+accounts:
+ message: "Wecome to eazybank"
+ contactDetails:
+  name: "sridhar"
+  email: "sri@gmail.com" 

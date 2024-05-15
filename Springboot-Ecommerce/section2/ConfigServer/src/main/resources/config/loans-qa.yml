@@ -1,0 +1,11 @@
+build:
+ version: "2.12"
+
+loans:
+ message: "Wecome to eazybank related to LOANS QA API"
+ contactDetails:
+  name: "bhasker-QA Lead"
+  email: "bhasker@gmail.com" 
+ onCallSupport:
+  -(666) 453-8873
+

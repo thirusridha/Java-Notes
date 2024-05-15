@@ -1,0 +1,11 @@
+build:
+ version: "1.12"
+
+loans:
+ message: "Wecome to eazybank related to loans PROD API's"
+ contactDetails:
+  name: "prakash-PROD Lead"
+  email: "prakash@gmail.com" 
+ onCallSupport:
+  -(666) 453-8873
+

@@ -1,0 +1,21 @@
+#spring.application.name=ConfigServe
+spring:
+ application:
+  name: "configserver"
+ profiles:
+  active: native
+# active: git
+ cloud:
+  config:
+   server:
+    native:
+     search-locations: "classpath:/config"
+#    search-locations: "file:///C:/Users/user54/Documents/Notes" 
+#   git:
+#    uri:""
+#    default-label: main
+#    timeout: 5
+#    clone-on-start:true
+#    force-pull: true
+server:
+ port: 8071
