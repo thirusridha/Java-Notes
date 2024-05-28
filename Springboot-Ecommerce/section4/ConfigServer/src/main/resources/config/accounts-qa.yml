@@ -1,0 +1,11 @@
+build:
+ version: "2.O"
+
+accounts:
+ message: "Wecome to eazybank related to QA API"
+ contactDetails:
+  name: "ravi-QA Lead"
+  email: "ravi@gmail.com" 
+ onCallSupport:
+  -(666) 453-8873
+

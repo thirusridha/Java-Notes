@@ -1,0 +1,11 @@
+build:
+ version: "2.6"
+
+cards:
+ message: "Wecome to eazybank related cards to QA API"
+ contactDetails:
+  name: "rahul-QA Lead"
+  email: "rahul@gmail.com" 
+ onCallSupport:
+  -(666) 453-8873
+

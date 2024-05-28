@@ -1,0 +1,39 @@
+services:
+ accounts:
+  image: "sriakrj/accounts:s4"
+  container_name: accounts-ms
+  ports:
+   - "8080:8080"
+  deploy:
+   resources:
+    limits:
+     memory: 700m
+  networks:
+   - sriakrj
+ loans:
+  image: "sriakrj/loans:s4"
+  container_name: loans-ms
+  ports:
+   - "8090:8090"
+  deploy:
+   resources:
+    limits:
+     memory: 700m
+  networks:
+   - sriakrj
+ cards:
+  image: "sriakrj/cards:s4"
+  container_name: cards-ms
+  ports:
+   - "9000:9000"
+  deploy:
+   resources:
+    limits:
+     memory: 700m
+  networks:
+   - sriakrj
+networks:
+  sriakrj:
+   driver: "bridge"
+
+  

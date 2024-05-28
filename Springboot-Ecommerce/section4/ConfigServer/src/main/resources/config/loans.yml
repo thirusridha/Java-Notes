@@ -1,0 +1,8 @@
+build:
+ version: "3.3"  
+ 
+loans:
+ message: "Wecome to eazybank loans"
+ contactDetails:
+  name: "sridhar"
+  email: "sri@gmail.com" 

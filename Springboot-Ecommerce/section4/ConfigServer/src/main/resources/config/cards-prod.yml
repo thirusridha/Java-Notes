@@ -1,0 +1,11 @@
+build:
+ version: "1.5"
+
+cards:
+ message: "Wecome to eazybank related cards to PRODUCTION API's"
+ contactDetails:
+  name: "sham-PROD Lead"
+  email: "shyam@gmail.com" 
+ onCallSupport:
+  -(666) 453-8873
+

@@ -1,0 +1,10 @@
+build:
+ version: "1.1"
+
+accounts:
+ message: "Wecome to eazybank related to PROD API's"
+ contactDetails:
+  name: "kumar-Prod Lead"
+  email: "ravi@gmail.com" 
+ onCallSupport:
+  -(666) 453-8873

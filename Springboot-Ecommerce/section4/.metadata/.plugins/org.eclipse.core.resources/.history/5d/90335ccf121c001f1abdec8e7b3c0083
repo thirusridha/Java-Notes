@@ -1,0 +1,30 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: "cards"
+  profiles:
+    active: "prod"
+  datasource:
+    url: jdbc:mysql://localhost:3306/cards
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: $Ridhar@123
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  config:
+   import:
+    "optional:configserver:http://localhost:8071/"
+  rabbitmq:
+   host: "localhost"
+   port: 5672
+   username: "guest"
+   password: "guest"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

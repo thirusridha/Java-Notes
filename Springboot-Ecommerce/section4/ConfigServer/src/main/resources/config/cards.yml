@@ -1,0 +1,8 @@
+build:
+ version: "3.1"  
+ 
+cards:
+ message: "Wecome to eazybank cards"
+ contactDetails:
+  name: "sridhar"
+  email: "sri@gmail.com" 
